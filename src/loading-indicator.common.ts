@@ -40,6 +40,11 @@ export interface OptionsCommon {
   dimBackground?: boolean;
 
   /**
+   * parameters if dimBackground is true
+   */
+  parsDim?: [string, number];
+
+  /**
    * Hide bezel around indicator
    */
   hideBezel?: boolean;

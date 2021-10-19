@@ -125,7 +125,14 @@ export class LoadingIndicator {
   private _isShowing(loader: android.widget.PopupWindow) {
     return loader.isShowing();
   }
-
+  private _hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : { r: 0, g: 0, b: 0 };
+  }
   private _createPopOver(context, options?: OptionsCommon) {
     this._popOver = new android.widget.PopupWindow();
     const ref = new WeakRef(this);
@@ -163,11 +170,11 @@ export class LoadingIndicator {
       })
     );
     const defaultBackgroundColor = android.graphics.Color.WHITE;
-
+    const rgb = this._hexToRgb(options.parsDim?.[0]);
     // handle dimming background option
     contentView.setBackgroundColor(
       options.dimBackground
-        ? new Color(255 * 0.6, 0, 0, 0).android
+        ? new Color(255 * (options.parsDim?.[1] ?? 0.6), rgb.r, rgb.g, rgb.b).android
         : android.graphics.Color.TRANSPARENT
     );
 

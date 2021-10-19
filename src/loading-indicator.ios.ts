@@ -42,8 +42,8 @@ export class LoadingIndicator {
 
     if (options.dimBackground) {
       this._hud.backgroundView.style = MBProgressHUDBackgroundStyle.SolidColor;
-      this._hud.backgroundView.color = new Color('#000').ios;
-      this._hud.backgroundView.alpha = 0.3;
+      this._hud.backgroundView.color = new Color(options.parsDim?.[0] ?? '#000').ios;
+      this._hud.backgroundView.alpha = options.parsDim?.[1] ?? 0.3;
     }
 
     if (options.margin) this._hud.margin = options.margin;
